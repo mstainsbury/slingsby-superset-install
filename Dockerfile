@@ -1,10 +1,11 @@
 FROM centos/python-36-centos7
 RUN apk add --no-cache python3-dev \
     && pip3 install --upgrade pip
-    yum -y update
 
 WORKDIR /opt/app
 COPY . /opt/app
+
+RUN yum -y update
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
