@@ -24,7 +24,7 @@ RUN yum -y update &&\
     yum -y libffi-devel &&\
     yum clean all &&\
     yum -y python-devel &&\
-    yum clean al  &&\
+    yum clean all &&\
     yum -y python-pip &&\
     yum clean all &&\
     yum -y python-wheel &&\
@@ -38,9 +38,11 @@ RUN yum -y update &&\
     yum -y install python3-devel &&\
     yum clean all
 
+COPY requirements.txt /opt/app/requirements.txt
+
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-EXPOSE 8080
+EXPOSE 8080 8088
 
 ENTRYPOINT ["python3"]
 CMD ["helloworld.py"]
