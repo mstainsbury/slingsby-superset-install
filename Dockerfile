@@ -5,7 +5,8 @@ RUN apk add --no-cache python3-dev \
 WORKDIR /opt/app
 COPY . /opt/app
 
-RUN yum -y update
+RUN yum -y update; yum clean all
+RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
