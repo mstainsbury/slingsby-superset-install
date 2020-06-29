@@ -4,8 +4,11 @@ RUN pip3 install --upgrade pip
 WORKDIR /opt/app
 COPY . /opt/app
 
-RUN yum -y update; yum clean all
-RUN yum -y install httpd; yum clean all; systemctl enable httpd.service
+RUN yum -y update &&\
+    yum clean all &&\
+    yum -y install httpd &&\
+    yum clean all &&\
+    systemctl enable httpd.service
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
