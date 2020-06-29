@@ -42,7 +42,7 @@ COPY requirements.txt /opt/app/requirements.txt
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-EXPOSE 8080 8088
+EXPOSE 8080
 
 ENTRYPOINT ["python3"]
-CMD ["helloworld.py"]
+CMD "export FLASK_APP=superset"
