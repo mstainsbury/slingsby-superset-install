@@ -42,14 +42,13 @@ COPY requirements.txt /opt/app/requirements.txt
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-RUN export FLASK_APP=superset
-#RUN export FLASK_APP=superset &&\
-#    superset fab create-admin
-#RUN superset db upgrade  &&\
-#    superset load_examples  &&\
-RUN superset init
+RUN export FLASK_APP=superset && \
+        export LC_ALL=en_GB.utf8 && \
+        export LANG=en_GB.utf8 && \
+        superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin && \
+        superset db upgrade && \
+        superset init
 
-EXPOSE 8080
-
-ENTRYPOINT ["superset"]
-CMD ["run" "-p 8080","--with-threads","--reload", "--debugger"]
+COPY start_superset.sh /opt/app/start_superset.sh
+RUN chmod +x /opt/app/start_superset.sh
+CMD ["/opt/app/start_superset.sh"]
