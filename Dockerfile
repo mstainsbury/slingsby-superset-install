@@ -47,7 +47,7 @@ RUN export FLASK_APP=superset
 #    superset fab create-admin
 #RUN superset db upgrade  &&\
 #    superset load_examples  &&\
-RUN    superset init
+RUN superset init
 
 EXPOSE 8080
 
