@@ -42,7 +42,14 @@ COPY requirements.txt /opt/app/requirements.txt
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
+RUN export FLASK_APP=superset
+#RUN export FLASK_APP=superset &&\
+#    superset fab create-admin
+RUN superset db upgrade  &&\
+    superset load_examples  &&\
+    superset init
+
 EXPOSE 8080
 
-ENTRYPOINT ["python3"]
-CMD "export FLASK_APP=superset"
+ENTRYPOINT ["superset"]
+CMD ["-p 8080","--with-threads","--reload", "--debugger"]
