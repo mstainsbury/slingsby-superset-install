@@ -45,11 +45,11 @@ RUN pip3 --no-cache-dir install -r requirements.txt
 RUN export FLASK_APP=superset
 #RUN export FLASK_APP=superset &&\
 #    superset fab create-admin
-RUN superset db upgrade  &&\
-    superset load_examples  &&\
-    superset init
+#RUN superset db upgrade  &&\
+#    superset load_examples  &&\
+RUN    superset init
 
 EXPOSE 8080
 
 ENTRYPOINT ["superset"]
-CMD ["-p 8080","--with-threads","--reload", "--debugger"]
+CMD ["run" "-p 8080","--with-threads","--reload", "--debugger"]
